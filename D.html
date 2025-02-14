@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Popup</title>
+    <style>
+        /* ตั้งค่าหน้าจอให้ทุกอย่างอยู่กลางจอ */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fce4ec; /* พื้นหลังสีชมพูอ่อน */
+        }
+
+        /* กรอบของหัวใจ */
+        .heart-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* สไตล์หัวใจ */
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -50px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 50px;
+        }
+
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.1);
+        }
+
+        /* ป๊อปอัพข้อความ */
+        .popup {
+          width: 150px;
+          height: 50px;
+          font-size: 30px;
+          text-align: center;
+            position: absolute;
+            bottom: 180px; /* ปรับให้ขึ้นไปอยู่ข้างบนหัวใจ */
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: bounceUp 0.5s ease-out;
+        }
+
+        /* ลูกศรป๊อปอัพ (ชี้ไปที่หัวใจ) */
+        .popup::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 10px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+
+        /* เอฟเฟกต์แสดงป๊อปอัพ: เด้งขึ้น */
+        @keyframes bounceUp {
+            0% {
+                transform: translateX(-50%) translateY(20px);
+                opacity: 0;
+            }
+            50% {
+                transform: translateX(-50%) translateY(-10px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .font {
+          position: absolute;
+          top:10px;
+          left: 10px;
+        }
+    </style>
+</head>
+<body>
+  <div>
+    <h1 class="font">HAPPY VARENTINE DAY</h1>
+    </div>
+    <div class="heart-container">
+        <div class="popup" id="popup">❤️  ควย ❤️</div>
+        <div class="heart" onclick="togglePopup()"></div>
+    </div>
+
+    <script>
+        function togglePopup() {
+            var popup = document.getElementById("popup");
+            if (popup.style.display === "block") {
+                popup.style.display = "none";
+            } else {
+                popup.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+</html>
